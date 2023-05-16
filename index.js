@@ -15,7 +15,7 @@ const updatePaginationDiv = (currentPage, numPages) => {
       active = "active";
     }
     $('#pagination').append(`
-    <button class="btn btn-primary page ml-1 numberedButtons ${active}" value="${i}">${i}</button>
+    <button class="btn btn-warning page ml-1 numberedButtons ${active}" value="${i}">${i}</button>
     `)
   }
 
@@ -30,7 +30,7 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
     <div class="pokeCard card" pokeName=${res.data.name}   >
         <h3>${res.data.name.toUpperCase()}</h3> 
         <img src="${res.data.sprites.front_default}" alt="${res.data.name}"/>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pokeModal">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pokeModal">
           More
         </button>
         </div>  
