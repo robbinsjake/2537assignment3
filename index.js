@@ -2,7 +2,13 @@ const PAGE_SIZE = 10
 let currentPage = 1;
 let pokemons = []
 let numPageBtn = 5;
+let showPokemon = 0;
+let totalPokemon = 0;
 
+function displayTotal(){
+  var showing = document.getElementById("showing");
+  showing.innerText = "Showing " + showPokemon + " of " + totalPokemon + " Pokemon";
+}
 
 const updatePaginationDiv = (currentPage, numPages) => {
   $('#pagination').empty()
@@ -32,6 +38,10 @@ const updatePaginationDiv = (currentPage, numPages) => {
 
 }
 
+
+
+
+
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   selected_pokemons = pokemons.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
   $('#pokeCards').empty()
@@ -47,6 +57,10 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
         </div>  
         `)
   })
+  showPokemon = selected_pokemons.length;
+  displayTotal();
+
+
 }
 
 
@@ -55,6 +69,8 @@ const setup = async () => {
     $('#pokeCards').empty()
     let response = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=810');
     const pokemons = response.data.results;
+    totalPokemon = pokemons.length;
+    displayTotal();
 
     paginate(currentPage, PAGE_SIZE, pokemons)
     const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
@@ -109,6 +125,14 @@ const setup = async () => {
 
 
 
+}
+
+
+function showingNumberOfPokemon() {
+  $('#qtyPokemonDisplay').empty()
+  $('#qtyPokemonDisplay').append(`
+  <h5>Showing ${qtyPokemonDisplay} of ${ pokemons.length } Pokemon</h5>
+  `)
 }
 
 
