@@ -15,7 +15,18 @@ const updatePaginationDiv = (currentPage, numPages) => {
       active = "active";
     }
     $('#pagination').append(`
-    <button class="btn btn-warning page ml-1 numberedButtons ${active}" value="${i}">${i}</button>
+    <button class="btn btn-danger page ml-1 numberedButtons ${active}" value="${i}">${i}</button>
+    `)
+  }
+
+  if (currentPage > 1) {
+    $('#pagination').prepend(`
+    <button class="btn btn-danger page ml-1 numberedButtons" value="${currentPage - 1}">Prev</button>
+    `)
+  }
+  if (currentPage < numPages) {
+    $('#pagination').append(`
+    <button class="btn btn-danger page ml-1 numberedButtons" value="${currentPage + 1}">Next</button>
     `)
   }
 
